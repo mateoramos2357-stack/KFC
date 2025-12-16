@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 --   TABLA: Cliente
 -- ======================================================
 CREATE TABLE Cliente (
-    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT PRIMARY KEY,
     nombre VARCHAR(100),
     telefono VARCHAR(20),
     direccion VARCHAR(150)
@@ -38,7 +38,7 @@ INSERT INTO Cliente (nombre, telefono, direccion) VALUES
 --   TABLA: Metodo_Pago
 -- ======================================================
 CREATE TABLE Metodo_Pago (
-    id_metodo INT AUTO_INCREMENT PRIMARY KEY,
+    id_metodo INT PRIMARY KEY,
     metodo VARCHAR(50)
 );
 
@@ -53,7 +53,7 @@ INSERT INTO Metodo_Pago (metodo) VALUES
 --   TABLA: Producto (MENÚ)
 -- ======================================================
 CREATE TABLE Producto (
-    id_producto INT AUTO_INCREMENT PRIMARY KEY,
+    id_producto INT PRIMARY KEY,
     nombre VARCHAR(100),
     categoria VARCHAR(50),
     precio DECIMAL(5,2)
@@ -74,7 +74,7 @@ INSERT INTO Producto (nombre, categoria, precio) VALUES
 --   TABLA: Pedido
 -- ======================================================
 CREATE TABLE Pedido (
-    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido INT PRIMARY KEY,
     id_cliente INT,
     fecha DATETIME,
     total DECIMAL(7,2),
@@ -95,7 +95,7 @@ INSERT INTO Pedido (id_cliente, fecha, total, canal_venta, estado, id_metodo) VA
 --   TABLA: Detalle_Pedido
 -- ======================================================
 CREATE TABLE Detalle_Pedido (
-    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_detalle INT PRIMARY KEY,
     id_pedido INT,
     id_producto INT,
     cantidad INT,
@@ -120,3 +120,4 @@ INSERT INTO Detalle_Pedido (id_pedido, id_producto, cantidad, precio_unit, subto
 
 -- Pedido 4
 (4, 2, 1, 9.99, 9.99);
+
