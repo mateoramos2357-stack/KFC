@@ -1,27 +1,9 @@
--- ======================================================
---   CREACIÓN BASE DE DATOS
--- ======================================================
-CREATE DATABASE IF NOT EXISTS KFC_Pedidos;
+CREATE DATABASE KFC_Pedidos;
+
 USE KFC_Pedidos;
 
--- ======================================================
---   RESETEAR TODAS LAS TABLAS CORRECTAMENTE
--- ======================================================
-SET FOREIGN_KEY_CHECKS = 0;
-
-DROP TABLE IF EXISTS Detalle_Pedido;
-DROP TABLE IF EXISTS Pedido;
-DROP TABLE IF EXISTS Producto;
-DROP TABLE IF EXISTS Metodo_Pago;
-DROP TABLE IF EXISTS Cliente;
-
-SET FOREIGN_KEY_CHECKS = 1;
-
--- ======================================================
---   TABLA: Cliente
--- ======================================================
 CREATE TABLE Cliente (
-    id_cliente INT PRIMARY KEY,
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100),
     telefono VARCHAR(20),
     direccion VARCHAR(150)
@@ -34,11 +16,8 @@ INSERT INTO Cliente (nombre, telefono, direccion) VALUES
 ('Ana Torres', '0964442211', 'Carapungo'),
 ('Luis Medina', '0998765432', 'Cumbayá');
 
--- ======================================================
---   TABLA: Metodo_Pago
--- ======================================================
 CREATE TABLE Metodo_Pago (
-    id_metodo INT PRIMARY KEY,
+    id_metodo INT AUTO_INCREMENT PRIMARY KEY,
     metodo VARCHAR(50)
 );
 
@@ -49,11 +28,8 @@ INSERT INTO Metodo_Pago (metodo) VALUES
 ('PayPhone'),
 ('Transferencia Bancaria');
 
--- ======================================================
---   TABLA: Producto (MENÚ)
--- ======================================================
 CREATE TABLE Producto (
-    id_producto INT PRIMARY KEY,
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100),
     categoria VARCHAR(50),
     precio DECIMAL(5,2)
@@ -70,11 +46,8 @@ INSERT INTO Producto (nombre, categoria, precio) VALUES
 ('Coca-Cola 500ml', 'Bebidas', 1.50),
 ('Nestea Durazno 500ml', 'Bebidas', 1.50);
 
--- ======================================================
---   TABLA: Pedido
--- ======================================================
 CREATE TABLE Pedido (
-    id_pedido INT PRIMARY KEY,
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT,
     fecha DATETIME,
     total DECIMAL(7,2),
@@ -86,16 +59,13 @@ CREATE TABLE Pedido (
 );
 
 INSERT INTO Pedido (id_cliente, fecha, total, canal_venta, estado, id_metodo) VALUES
-(1, '2025-01-12 13:45:00', 17.48, 'Local', 'Pagado', 1),
+(1, '2025-01-12 13:45:00', 11.99, 'Local', 'Pagado', 1),
 (2, '2025-01-12 14:10:00', 22.50, 'Delivery', 'Pagado', 3),
-(3, '2025-01-12 14:35:00', 11.49, 'App', 'Pendiente', 2),
-(5, '2025-01-12 15:20:00', 9.49, 'Local', 'Pagado', 4);
+(3, '2025-01-12 14:35:00', 8.00, 'App', 'Pendiente', 2),
+(5, '2025-01-12 15:20:00', 9.99, 'Local', 'Pagado', 4);
 
--- ======================================================
---   TABLA: Detalle_Pedido
--- ======================================================
 CREATE TABLE Detalle_Pedido (
-    id_detalle INT PRIMARY KEY,
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
     id_pedido INT,
     id_producto INT,
     cantidad INT,
@@ -106,18 +76,11 @@ CREATE TABLE Detalle_Pedido (
 );
 
 INSERT INTO Detalle_Pedido (id_pedido, id_producto, cantidad, precio_unit, subtotal) VALUES
--- Pedido 1
 (1, 1, 1, 7.99, 7.99),
 (1, 8, 1, 1.50, 1.50),
 (1, 5, 1, 2.50, 2.50),
-
--- Pedido 2
 (2, 3, 1, 22.50, 22.50),
-
--- Pedido 3
 (3, 4, 1, 6.50, 6.50),
 (3, 9, 1, 1.50, 1.50),
-
--- Pedido 4
 (4, 2, 1, 9.99, 9.99);
 
